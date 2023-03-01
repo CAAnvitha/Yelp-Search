@@ -1,6 +1,11 @@
 # Yelp-Search
 
 
+The deployed link https://angularproject098.wl.r.appspot.com/search
+
+
+
+
 This is an Web Application implementing the yelp application with basic functionality with Angular.js as front end and Node.js as backend, which allows users to search for restaurants and businesses and look at detailed information about them.
 
 The frontend of this website is implemented using the Angular framework and is hosted on google cloud app engine. The backend of this website is implemented using the Node.js and is hosted on google cloud app engine. This website is made responsive with CSS media queries and Bootstrap
@@ -28,3 +33,5 @@ It has the following features -
 -Using local storage to store and remove bookings
 
 -Bootstrap responsive grid design
+
+-To run the project, clone the repository and run the command "npm -i" under path "/clients"
