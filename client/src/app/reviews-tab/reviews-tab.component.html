@@ -1,0 +1,14 @@
+<table class="table table-striped" style="height: 450px;">
+    <tbody>
+        <tr *ngFor="let review of reviews;let i=index">
+            <td>
+                <div>
+                    <b>{{review.user_name}}</b>
+                    <p>Rating: 5/{{review.rating}}</p>
+                    <p>{{review.text}}</p>
+                    <p>{{review.time_created}}</p>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

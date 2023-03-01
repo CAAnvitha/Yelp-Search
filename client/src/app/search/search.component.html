@@ -1,0 +1,22 @@
+<div class="container-fluid" style="overflow-y: scroll; padding-bottom: 20px;">
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-lg-5 col-md-12 mt-5">
+            <app-business-search-form (searchFormData)="onSearchFormDataSubmit($event)" [onClear]="onClear"></app-business-search-form>
+        </div>
+    </div>
+    <div *ngIf="businesses.length > 0" class="row d-flex align-items-center justify-content-center mt-5">
+        <div class="col-lg-10">
+            <app-business-table *ngIf="businesses.length > 0 && !showDetails" [businesses]="businesses" [onBusinessRowClick]="fetchAndShowBusinessDetails"></app-business-table>
+        </div>
+    </div>
+    <div *ngIf="selectedBusiness.name !== ''" class="row d-flex align-items-center justify-content-center mt-5">
+        <div class="col-lg-7">
+            <app-business-detail *ngIf="showDetails" [business]="selectedBusiness" [onGoBack]="hideDetails"></app-business-detail>
+        </div>
+    </div>
+    <div *ngIf="showNoResultsMessage" class="row d-flex align-items-center justify-content-center mt-5">
+        <div class="col-lg-3 text-center bg-white rounded-pill p-0">
+            <p class="text-danger fw-bold fs-5 m-0">No results available</p>
+        </div>
+    </div>
+</div>

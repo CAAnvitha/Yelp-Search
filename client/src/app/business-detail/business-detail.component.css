@@ -1,0 +1,19 @@
+#go-back {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.tab {
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 786px) {
+    #go-back {
+        width: 13px;
+        height: 13px;
+        cursor: pointer;
+        margin: 5px;
+    }
+}

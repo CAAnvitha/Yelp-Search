@@ -1,0 +1,18 @@
+#twitter-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+#facebook-icon {
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+#clock-icon {
+    width: 25px;
+    height: 25px;
+}

@@ -1,0 +1,20 @@
+<table class="table table-responsive table-striped bg-white card-container text-center">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Image</th>
+      <th scope="col">Business Name</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Distance (miles)</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr (click)="onRowClick(business.id)" *ngFor="let business of businesses;let i=index" style="cursor: pointer;">
+          <th scope="row">{{i+1}}</th>
+          <td><img class="image-responsive" src={{business.image_url}}/></td>
+          <td>{{business.name}}</td>
+          <td>{{business.rating}}</td>
+          <td>{{roundOff(business.distance)}}</td>
+      </tr>
+  </tbody>
+</table>

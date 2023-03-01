@@ -1,0 +1,9 @@
+#autocomplete-spinner {
+    width: 1.5rem; 
+    height: 1.5rem;
+    color: #6f42c1;
+}
+
+#search-form {
+    border: 1px solid lightgray;
+}

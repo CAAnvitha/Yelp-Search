@@ -1,0 +1,71 @@
+<div class="container-fluid card-container" id="search-form">
+  <div class="row d-flex align-items-center justify-content-center">
+    <div class="col-lg-12">
+      <form ngNativeValidate class="p-lg-5 p-md-3" #searchForm="ngForm" (ngSubmit)="onSubmit()">
+        <h3 class="text-center">Business search</h3>
+        <div class="row my-3">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label for="keyword">Keyword</label>
+              <input class="form-control" id="keyword" name="keyword" required matInput [(ngModel)]="searchData.keyword" [matAutocomplete]="auto" [formControl]="searchKeywordCtrl">
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected()"
+                [displayWith]="displayWith">
+                <mat-option *ngIf="isLoading" class="is-loading">
+                  <div class="spinner-border mt-3" id="autocomplete-spinner" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </mat-option>
+                <ng-container *ngIf="!isLoading">
+                  <mat-option *ngFor="let keyword of filteredKeywords" [value]="keyword">
+                    <span>{{keyword}}</span>
+                  </mat-option>
+                </ng-container>
+              </mat-autocomplete>
+            </div>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-lg-6 col-md-12">
+            <div class="form-group">
+              <label for="radius">Distance</label>
+              <input type="number" class="form-control" id="radius" required [(ngModel)]="searchData.radius" name="radius">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-8">
+            <div class="form-group">
+                <label for="category">Categories</label>
+                <select class="form-control" id="category" required [(ngModel)]="searchData.category" name="category">
+                  <option *ngFor="let Category of Categories" [value]="Category.value">
+                    {{Category.label}}
+                  </option>
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label for="location" >Location</label>
+              <input class="form-control" id="location" required [(ngModel)]="searchData.location" name="location" [disabled]="searchData.autoDetectLocation">
+            </div>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-lg-12">
+            <div class="form-group form-check">
+              <label class="form-check-label" for="exampleCheck1">Auto-detect my location</label>
+              <input type="checkbox" class="form-check-input" id="autoDetectLocation" [(ngModel)]="searchData.autoDetectLocation" name="autoDetectLocation">
+            </div>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-lg-12 d-flex align-items-center justify-content-center">
+            <button type="submit" class="btn btn-danger mx-4">Submit</button>
+            <button class="btn btn-primary" (click)="clear()">Clear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

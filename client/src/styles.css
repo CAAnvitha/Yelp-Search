@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.carousel-control-prev-icon{
+    background-image: url('./assets/left.svg')
+ }
+ .carousel-control-next-icon{
+   background-image: url('./assets/right.svg')
+ }
+
+.card-container {
+    border-radius: 10px;
+    background-color: white;
+}

@@ -1,0 +1,137 @@
+<div class="container-fluid text-center mt-4">
+    <div class="row">
+        <div class="col-lg-6">
+            <h5>Address</h5>
+            <p>{{business.address}}</p>
+        </div>
+        <div class="col-lg-6">
+            <h5>Category</h5>
+            <p>{{business.categories}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <h5>Phone</h5>
+            <p>{{business.phone}}</p>
+        </div>
+        <div class="col-lg-6">
+            <h5>Price range</h5>
+            <p>{{business.price}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <h5>Status</h5>
+            <p>{{business.is_closed ? 'Open': 'Closed'}}</p>
+        </div>
+        <div class="col-lg-6">
+            <h5>Visit yelp for more</h5>
+            <a [href]="business.url" target="_blank">Business link</a>
+        </div>
+    </div>
+
+    <button *ngIf="showReserveButton" class="btn btn-danger" (click)="open(content)">Reserve Now</button>
+    <button *ngIf="!showReserveButton" class="btn btn-primary" (click)="onCancelReserve()">Cancel reservation</button>
+
+    <div class="row my-2">
+      <div class="col-lg-12 align-items-center">
+        <span class="d-inline-block text-md" style="align-self: flex-end;">Share on: </span>
+        <a href={{twitterShareUrl}} target="_blank"><img src="../../assets/twitter.svg" id="twitter-icon"/></a>
+        <a href={{facebookShareUrl}} target="_blank"><img src="../../assets/facebook.svg" id="facebook-icon"/></a>
+      </div>
+    </div>
+
+    <div class="row">
+      <ngb-carousel *ngIf="business.photos" [showNavigationIndicators]="false">
+        <ng-template ngbSlide *ngFor="let photoUrl of business.photos;let i=index">
+          <div class="picsum-img-wrapper">
+            <img [src]="photoUrl" alt="Business photo" height="300px" width="300px" />
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  
+    <!-- Modal -->
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Reservation Form</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <form ngNativeValidate class="p-1 needs-validation" #searchForm="ngForm" (ngSubmit)="searchForm.valid && onReserve()" novalidate>
+          <h3 class="text-center">{{business.name}}</h3>
+          <div class="row my-3">
+            <div class="col-lg-12">
+              <div class="form-group has-validation">
+                <label for="email">Email</label>
+                <input [email]="true" class="form-control" id="email" required #email="ngModel" [(ngModel)]="reservationData.email" name="email"
+                [class.is-invalid]="(email.touched || email.dirty || searchForm.submitted) && email.errors">
+                <span
+                  class="invalid-feedback"
+                  *ngIf="(email.touched || email.dirty || searchForm.submitted) && email.errors?.['required']"
+                  > 
+                    Email is required
+                </span>
+                <span
+                  class="invalid-feedback"
+                  *ngIf="(email.touched || email.dirty || searchForm.submitted) && email.errors?.['email']"
+                  > 
+                    Email must be a valid email address
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input [min]="getCurrentDate()" required class="form-control" id="date" name="date" type="date" #dateInput="ngModel"  [(ngModel)]="reservationData.date" [class.is-invalid]="(dateInput.touched || dateInput.dirty || searchForm.submitted) && dateInput.errors"/>
+                <span
+                  class="invalid-feedback"
+                  *ngIf="(dateInput.touched || dateInput.dirty || searchForm.submitted) && dateInput.errors?.['required']"
+                  > 
+                    Date is required
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col-6">
+              <div class="row form-group g-2">
+                <label for="hour">Time</label>
+                <div class="col">
+                  <select class="form-control" id="hour" required [(ngModel)]="reservationData.hour" name="hour" #hourSelect="ngModel" [class.is-invalid]="(hourSelect.touched || hourSelect.dirty || searchForm.submitted) && hourSelect.errors">
+                    <option *ngFor="let hour of hours" [value]="hour">
+                      {{hour}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-1">
+                  <p class="align-middle">:</p>
+                </div>
+                <div class="col">
+                  <select class="form-control" id="mins" required [(ngModel)]="reservationData.mins" name="mins" #minsSelect="ngModel" [class.is-invalid]="(minsSelect.touched || minsSelect.dirty || searchForm.submitted) && minsSelect.errors">
+                    <option *ngFor="let min of mins" [value]="min">
+                      {{min}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-1">
+                  <img src="../../assets/clock.svg" id="clock-icon" class="align-middle"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col-lg-12 d-flex align-items-center justify-content-center">
+              <button type="submit" class="btn btn-danger mx-4">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" (click)="modal.close()">Close</button>
+      </div>
+    </ng-template>
+</div>
